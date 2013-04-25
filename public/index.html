@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Simple Flickr App</title>
+<link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+    <h3>Search For Photos on Flickr.</h3>
+    <input id="searchInput" type="text"/>
+    <button id="searchButton">Search</button>
+    <div id="pagingControls">
+        <button id="previousButton">Previous</button>
+        <button id="nextButton">Next</button>
+    </div>
+    <div id="resultsBox"></div>
+</body>
+
+<script src="js/FlickrWidget.js"></script>
+
+<script>
+    var flickrWidget = new SimpleFlickrWidget("searchButton", "searchInput", "resultsBox", "nextButton", "previousButton" , "df3c5e71cf0d6306e039a6afd9f4167c", 10).init();
+</script>
+
+</html>
