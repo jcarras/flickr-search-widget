@@ -71,6 +71,9 @@ var SimpleFlickrWidget = function (searchButtonId, textInputId, mainContainer, n
 
                 xmlhttp.open("GET",url,true);
                 xmlhttp.send();
+            }
+            else{
+                alert("Please enter some text to search by.");
             };
         },
 
@@ -92,15 +95,31 @@ var SimpleFlickrWidget = function (searchButtonId, textInputId, mainContainer, n
         },
 
         setPhotoData : function(data){
-            document.getElementById(this.mainContainer).innerHTML = "";
             this.photosData = data;
-            for( var i = 0; i < this.photosData.photos.photo.length; i++){
-                var item = this.photosData.photos.photo[i];
-                var src = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_m.jpg";
-                var img = document.createElement('IMG');
-                img.setAttribute('src',src);
-                var element=document.getElementById(this.mainContainer);
-                element.appendChild(img);
+            if(this.photosData.photos !== undefined){
+                //Clear out the container
+                var mainContainer = document.getElementById(this.mainContainer);
+
+                if(mainContainer.childNodes.length > 0){
+                    mainContainer.removeChild(mainContainer.childNodes[0]);
+                };
+
+                var imgContainer = document.createElement('DIV');
+
+                for( var i = 0; i < this.photosData.photos.photo.length; i++){
+                    var item = this.photosData.photos.photo[i];
+                    var src = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_m.jpg";
+                    var img = document.createElement('IMG');
+                    img.setAttribute('src',src);
+                    imgContainer.appendChild(img);
+                };
+
+                setTimeout(function(){
+                    mainContainer.appendChild(imgContainer);
+                }, 1000);
+            }
+            else{
+                alert("No photos found with the tag.");
             };
         }
     }
