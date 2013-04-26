@@ -1,6 +1,14 @@
-html, body {height:100%;}
-html {display:table; width:100%;}
-body {display:table-cell; text-align:center; padding-top: 50px;}
+html, body {
+    height:100%;
+}
+
+html {
+    display:table; width:100%;
+}
+
+body {
+    display:table-cell; text-align:center; padding-top: 50px;
+}
 
 #resultsBox {
     width: 500px;
@@ -18,4 +26,9 @@ img {
     padding-top: 5px;
     padding-bottom: 5px;
     padding-right: 5px;
+}
+
+#searchInput {
+    height: 20px;
+    width: 250px;
 }

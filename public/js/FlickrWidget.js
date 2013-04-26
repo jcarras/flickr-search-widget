@@ -27,6 +27,16 @@ var SimpleFlickrWidget = function (searchButtonId, textInputId, mainContainer, n
                 me.pagePhotos("previous");
             };
 
+            document.getElementById(previousButtonId).onclick=function(){
+                me.pagePhotos("previous");
+            };
+
+            document.onkeydown=function(event){
+                if (event.keyCode == 13) {
+                    me.searchPhotos();
+                };
+            };
+
             this.apiKey                 = apiKey;
             this.numberOfResultsPerPage = numberOfResultsPerPage;
             this.textInputId            = textInputId;
@@ -35,7 +45,6 @@ var SimpleFlickrWidget = function (searchButtonId, textInputId, mainContainer, n
         },
 
         searchPhotos : function(){
-
             var xmlhttp;
             if (window.XMLHttpRequest)
             {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -53,18 +62,20 @@ var SimpleFlickrWidget = function (searchButtonId, textInputId, mainContainer, n
             };
 
             var searchText = document.getElementById(this.textInputId).value;
-            var url = "http://api.flickr.com/services/rest/?method=flickr.photos.search&format=json&api_key=" + this.apiKey + "&tags=" + searchText + "&safe_search=1&per_page=" + this.numberOfResultsPerPage + "&page=" + this.currentPageNum;
 
-            xmlhttp.onreadystatechange=function()
-            {
-                if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            if(searchText !== ""){
+                var url = "http://api.flickr.com/services/rest/?method=flickr.photos.search&format=json&api_key=" + this.apiKey + "&tags=" + searchText + "&safe_search=1&per_page=" + this.numberOfResultsPerPage + "&page=" + this.currentPageNum;
+                xmlhttp.onreadystatechange=function()
                 {
-                    eval(xmlhttp.response);
-                }
-            }
+                    if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                    {
+                        eval(xmlhttp.response);
+                    }
+                };
 
-            xmlhttp.open("GET",url,true);
-            xmlhttp.send();
+                xmlhttp.open("GET",url,true);
+                xmlhttp.send();
+            };
         },
 
         pagePhotos : function(direction){
@@ -81,7 +92,6 @@ var SimpleFlickrWidget = function (searchButtonId, textInputId, mainContainer, n
                     }
                     break;
                 default:
-
             }
         },
 
