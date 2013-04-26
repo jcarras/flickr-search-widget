@@ -27,10 +27,6 @@ var SimpleFlickrWidget = function (searchButtonId, textInputId, mainContainer, n
                 me.pagePhotos("previous");
             };
 
-            document.getElementById(previousButtonId).onclick=function(){
-                me.pagePhotos("previous");
-            };
-
             document.onkeydown=function(event){
                 if (event.keyCode == 13) {
                     me.searchPhotos();
